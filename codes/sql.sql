@@ -34,7 +34,7 @@ readm30day
 /* create new variables */
 ,cast(DATE_PART('year', bill.date_of_admission::date) - DATE_PART('year', date_of_birth::date)as integer) age_at_adm -- age at admission
 ,cast(DATE_PART('day', date_of_discharge::timestamp - bill.date_of_admission::timestamp)as integer) LOS -- length of stay
-,round (cast ((tot_bill / DATE_PART('day', date_of_discharge::timestamp - bill.date_of_admission::timestamp))as numeric),2) avg_bill -- avg bill per day
+--,round (cast ((tot_bill / DATE_PART('day', date_of_discharge::timestamp - bill.date_of_admission::timestamp))as numeric),2) avg_bill -- avg bill per day
 ,round(cast( (tot_bill / DATE_PART('day', date_of_discharge::timestamp - bill.date_of_admission::timestamp)) / (DATE_PART('day', date_of_discharge::timestamp - bill.date_of_admission::timestamp))as numeric),2) avg_max_bill -- avg max bill per day
 ,round(cast(weight/(power((height/100),2))as numeric),2) bmi -- (weight kg) / (height m)**2
 ,case when round(cast(weight/(power((height/100),2))as numeric),2) > 27.5 then 'high' when round(cast(weight/(power((height/100),2))as numeric),2) > 23 then 'moderate' when round(cast(weight/(power((height/100),2))as numeric),2) > 18.5 then 'normal' else 'deficiency' end bmi_risk -- bmi risk from healthhub.sg 
@@ -63,34 +63,25 @@ from tot_bill bill
 
 select 
 /* order our columns neatly */
-id_, A.id "patient_id", date_part('MONTH',date_of_admission) mth_adm, date_part('year',date_of_admission) yr_adm, los,
-case when age_at_adm < 36 then '35' when age_at_adm < 46 then '45' when age_at_adm < 56 then '55' when age_at_adm < 66 then '65' else '>65' end age_bin,
-gender_c, resident_status_c,race_c,age_at_adm,readm30day,
+id_, A.id "patient_id", gender_c, resident_status_c,race_c,age_at_adm,
+-- case when age_at_adm < 36 then '35' when age_at_adm < 46 then '45' when age_at_adm < 56 then '55' when age_at_adm < 66 then '65' else '>65' end age_bin,
+case when age_at_adm < 56 then 0 else 1 end age_grp, -- =< 55 = 0 > 55 = 1
+los,
+--date_part('MONTH',date_of_admission) mth_adm, date_part('QUARTER',date_of_admission) qrt_adm,date_part('year',date_of_admission) yr_adm, readm30day,
 medical_history_1, medical_history_2_c,medical_history_3_c,
 medical_history_4,medical_history_5_c,medical_history_6,medical_history_7,
 (medical_history_1+medical_history_2_c+medical_history_3_c+medical_history_4+medical_history_5_c+medical_history_6+medical_history_7) no_med_hist, -- number of medical history
 preop_medication_1,preop_medication_2,preop_medication_3,preop_medication_4,preop_medication_5,preop_medication_6,
+(preop_medication_1+preop_medication_2+preop_medication_3+preop_medication_4+preop_medication_5+preop_medication_6) no_meds, -- number of pre-op medications prescribed
 symptom_1,symptom_2,symptom_3,symptom_4,symptom_5,
-lab_result_1,lab_result_2,lab_result_3,weight,height,bmi,bmi_risk,
-avg_bill, tot_bill
+(symptom_1+symptom_2+symptom_3+symptom_4+symptom_5) no_sym, -- number of symptoms
+lab_result_1,lab_result_2,lab_result_3,
+weight,height,bmi,
+--bmi_risk,
+case when bmi_risk='high'then 4 when bmi_risk='moderate' then 3 when bmi_risk='normal' then 2 when bmi_risk='deficiency' then 1 else 0 end bmi_risk_c,
+--avg_bill,
+tot_bill
 
 from A
-
-	
--- select 
--- /* order our columns neatly */
--- A.id "patient_id", date_of_admission, date_of_discharge,los,
--- gender_c, gender_str,resident_status_c,resident_status_str,race_c,race_str,age_at_adm,readm30day,
--- medical_history_1, medical_history_2_c,medical_history_3_c,
--- medical_history_4,medical_history_5_c,medical_history_6,medical_history_7,
--- (medical_history_1+medical_history_2_c+medical_history_3_c+medical_history_4+medical_history_5_c+medical_history_6+medical_history_7) no_med_hist, -- number of medical history
-
--- preop_medication_1,preop_medication_2,preop_medication_3,preop_medication_4,preop_medication_5,preop_medication_6,
--- symptom_1,symptom_2,symptom_3,symptom_4,symptom_5,
--- lab_result_1,lab_result_2,lab_result_3,weight,height,bmi,bmi_risk,
--- avg_bill, max_bill, tot_bill, avg_max_bill
-
--- from A
-
 
 
