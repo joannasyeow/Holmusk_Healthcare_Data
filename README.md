@@ -4,12 +4,12 @@ The goal of this challenge is to identify key cost drivers associated with inpat
 (Let's call it condition X)
 
 There are a total of 1 presentation slide, 2 SQL codes and 3 notebooks for this project :
-1. [slides.keynote] / [slides.pptx]
-2. [SQL.SQL](xx)
-3. [SQL_PT_2.SQL](xx)
-4. [EDA (Exploratory Data Analysis)](xx)
-5. [Patient Level](https://github.com/joannasys/Kaggle---Credit/blob/master/3_Data%20Preprocessing.ipynb)
-6. [Admission Level (WIP)](https://github.com/joannasys/Kaggle---Credit/blob/master/4_Data%20Modeling.ipynb)
+1. [slides.pptx](https://github.com/joannasyeow/Holmusk_Healthcare_Data/blob/master/slides.pptx)
+2. [SQL.SQL](https://github.com/joannasyeow/Holmusk_Healthcare_Data/blob/master/sql.sql)
+3. [SQL_PT_2.SQL](https://github.com/joannasyeow/Holmusk_Healthcare_Data/blob/master/sql_pt_2.sql)
+4. [EDA (Exploratory Data Analysis)](https://github.com/joannasyeow/Holmusk_Healthcare_Data/blob/master/1_eda.ipynb)
+5. [Patient Level](https://github.com/joannasyeow/Holmusk_Healthcare_Data/blob/master/2_patient_level.ipynb)
+6. [Admission Level (WIP)](https://github.com/joannasyeow/Holmusk_Healthcare_Data/blob/master/3_admission_level.ipynb)
 
 Project Flow:
 
