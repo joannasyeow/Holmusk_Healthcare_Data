@@ -53,6 +53,8 @@ select id_
 ,case when resident_status in ('Singaporean','Singapore citizen') then 1 else 0 end sg
 ,case when resident_status = 'PR' then 1 else 0 end pr
 ,case when resident_status = 'Foreigner' then 1 else 0 end foreigner
+,case when resident_status not in ('Singaporean','Singapore citizen') then 1 else 0 end not_sg
+,case when no_enc > 1 then 1 else 0 end readm
 
 ,tot_bill_yr 
 
