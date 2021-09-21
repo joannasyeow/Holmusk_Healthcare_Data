@@ -19,6 +19,8 @@ with tot_bill as (
 	,date_part('year',date_of_admission) year_
 	,round(cast(avg(weight)/(power((avg(height)/100),2))as numeric),2) avg_bmi -- (weight kg) / (height m)**2
 	,max(medical_history_1) medical_history_1
+--	,sum(symptom_5) symptom_5
+	,max(symptom_5) symptom_5 -- presence of symptom 5 at least once a year
 	,case when max(medical_history_2) is null then 0 else cast(max(medical_history_2) as integer) end medical_history_2_c -- impute null as 0
 	,case when max(medical_history_3) = 'Yes' then 1 when max(medical_history_3) = 'No' then 0 else cast(max(medical_history_3) as integer) end medical_history_3_c -- assumption: yes=1, no=0
 	,max(medical_history_4)medical_history_4
@@ -31,9 +33,11 @@ with tot_bill as (
 	group by id, year_
 )
 
+
 select id_
 ,bill.patient_id
 ,bill.no_enc
+,symptom_5
 ,medical_history_1, medical_history_2_c,medical_history_3_c,medical_history_4,medical_history_5_c,medical_history_6,medical_history_7
 ,(medical_history_1+medical_history_2_c+medical_history_3_c+medical_history_4+medical_history_5_c+medical_history_6+medical_history_7) no_med_hist -- number of medical history
 ,cast(bill.year_ - DATE_PART('year', date_of_birth::date)as integer) age_at_yr -- age at year

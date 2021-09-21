@@ -2,11 +2,10 @@
 
 with tot_bill as (
 /* there are multiple bills for each patient's admission. 
-this is to sum up the total bill and identify the max bill for each admission*/
+this is to sum up the total bill*/
 
 select id.patient_id, id.date_of_admission
 ,round(sum(amount),2) tot_bill -- total bill
-,round(max(amount),2) max_bill -- max bill in each encounter
 ,max(id.bill_id) id_ -- unique identifier
 ,row_number () over ( partition by patient_id order by date_of_admission ) enc_no -- encounter number per patient
 
@@ -27,7 +26,7 @@ from tot_bill t1
 
 ,A as (select
 			
-id_, data.*, tot_bill,max_bill,
+id_, data.*, tot_bill,
 enc_no, demo.date_of_birth, 
 readm30day
 
@@ -67,7 +66,9 @@ id_, A.id "patient_id", gender_c, resident_status_c,race_c,age_at_adm,
 -- case when age_at_adm < 36 then '35' when age_at_adm < 46 then '45' when age_at_adm < 56 then '55' when age_at_adm < 66 then '65' else '>65' end age_bin,
 case when age_at_adm < 56 then 0 else 1 end age_grp, -- =< 55 = 0 > 55 = 1
 los,
---date_part('MONTH',date_of_admission) mth_adm, date_part('QUARTER',date_of_admission) qrt_adm,date_part('year',date_of_admission) yr_adm, readm30day,
+date_part('MONTH',date_of_admission) mth_adm, 
+date_part('QUARTER',date_of_admission) qrt_adm,date_part('year',date_of_admission) yr_adm, 
+-- readm30day,
 medical_history_1, medical_history_2_c,medical_history_3_c,
 medical_history_4,medical_history_5_c,medical_history_6,medical_history_7,
 (medical_history_1+medical_history_2_c+medical_history_3_c+medical_history_4+medical_history_5_c+medical_history_6+medical_history_7) no_med_hist, -- number of medical history
