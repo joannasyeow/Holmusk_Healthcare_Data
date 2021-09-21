@@ -8,12 +8,12 @@ There are a total of 1 presentation slide, 3 SQL codes and 2 jupyter notebooks f
 2. [SQL.SQL](https://github.com/joannasyeow/Holmusk_Healthcare_Data/blob/master/sql.sql)
 3. [SQL_2.SQL](https://github.com/joannasyeow/Holmusk_Healthcare_Data/blob/master/sql_pt_2.sql)
 4. [SQL_PT_2.SQL](https://github.com/joannasyeow/Holmusk_Healthcare_Data/blob/master/sql_pt_2.sql)
-5. [EDA (Exploratory Data Analysis)](https://github.com/joannasyeow/Holmusk_Healthcare_Data/blob/master/1_EDA.ipynb)
-6. [Variable Analysis & Modelling](https://github.com/joannasyeow/Holmusk_Healthcare_Data/blob/master/2_Variables_Modellling.ipynb)
+5. [EDA (Exploratory Data Analysis)](https://github.com/joannasyeow/Holmusk_Healthcare_Data/blob/master/1_eda.ipynb)
+6. [Variable Analysis & Modelling](https://github.com/joannasyeow/Holmusk_Healthcare_Data/blob/master/2_Variables_Modelling.ipynb)
 
 HTML Version of jupyter notebook:
 
-5. [EDA (Exploratory Data Analysis)](https://github.com/joannasyeow/Holmusk_Healthcare_Data/blob/master/1_EDA.html)
-6. [Variable Analysis & Modelling](https://github.com/joannasyeow/Holmusk_Healthcare_Data/blob/master/2_Variables_Modellling.html)
+5. [EDA (Exploratory Data Analysis)](https://github.com/joannasyeow/Holmusk_Healthcare_Data/blob/master/1_eda.html)
+6. [Variable Analysis & Modelling](https://github.com/joannasyeow/Holmusk_Healthcare_Data/blob/master/2_Variables_Modelling.html)
 
 
